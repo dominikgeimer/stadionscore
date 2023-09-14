@@ -25,9 +25,12 @@ class AppPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('app')
-            ->path('app')
+            ->domain('app.filament.test')
+            ->path('')
+            ->registration()
             ->login()
             ->profile()
+            ->breadcrumbs(false)
             ->colors([
                 'primary' => Color::Blue,
             ])
