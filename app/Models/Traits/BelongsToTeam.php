@@ -14,7 +14,6 @@ trait BelongsToTeam
             });
 
             static::addGlobalScope('team_id', function (Builder $builder) {
-
                 $builder->where('team_id', session('team_id'));
             });
         }

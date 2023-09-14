@@ -24,6 +24,5 @@ class UserLoggedInListener
     public function handle(Login $event): void
     {
         Session::put('team_id', $event->user->team_id);
-        dd(session('team_id'));
     }
 }
