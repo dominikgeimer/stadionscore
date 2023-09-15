@@ -12,9 +12,8 @@ class UserObserver
      */
     public function creating(User $user): void
     {
-        $user->team_id = match (auth()->check()) {
-            true => auth()->user()->team->id,
-            default => Team::create()->id,
-        };
+        if (!auth()->check()) {
+            $user->team_id = Team::create()->id;
+        }
     }
 }
