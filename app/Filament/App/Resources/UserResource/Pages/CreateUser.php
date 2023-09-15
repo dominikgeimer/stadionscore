@@ -12,5 +12,5 @@ class CreateUser extends CreateRecord
 
     protected ?string $heading = 'New member';
 
-    protected ?string $subheading = 'Creae a new member and send an email invitation';
+    protected ?string $subheading = 'Create a new member and send an email invitation';
 }
