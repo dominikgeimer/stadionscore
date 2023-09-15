@@ -22,4 +22,11 @@ class ListUsers extends ListRecords
                 ->icon('heroicon-o-user-plus'),
         ];
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            UserResource\Widgets\StatsOverview::class,
+        ];
+    }
 }

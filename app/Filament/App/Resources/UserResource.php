@@ -68,6 +68,7 @@ class UserResource extends Resource
                     ->schema([
                         Select::make('roles')
                             ->label('Role')
+                            ->required()
                             ->preload()
                             ->multiple()
                             ->maxItems(1)
