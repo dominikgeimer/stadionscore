@@ -9,11 +9,15 @@ trait BelongsToTeam
     protected static function bootBelongsToTeam()
     {
         static::creating(function ($model) {
-            $model->team_id = session('team_id');
+            if (session()->has('team_id')) {
+                $model->team_id = session('team_id');
+            }
         });
 
         static::addGlobalScope('team_id', function (Builder $builder) {
-            $builder->where('team_id', session('team_id'));
+            if (session()->has('team_id')) {
+                $builder->where('team_id', session('team_id'));
+            }
         });
     }
 }
