@@ -60,6 +60,12 @@ class UserResource extends Resource
                             ->email()
                             ->required()
                             ->maxLength(255),
+                    ])
+                    ->aside(),
+                Section::make('Role selection')
+                    ->description('Select role for your new team member')
+                    ->icon('heroicon-o-shield-check')
+                    ->schema([
                         Select::make('roles')
                             ->label('Role')
                             ->preload()
@@ -67,7 +73,7 @@ class UserResource extends Resource
                             ->maxItems(1)
                             ->relationship('roles', 'name', fn (Builder $query) => $query->where('name', '!=', 'owner'))
                     ])
-                    ->columns(2)
+                    ->aside()
             ]);
     }
 
