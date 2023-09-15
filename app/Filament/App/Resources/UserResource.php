@@ -96,6 +96,8 @@ class UserResource extends Resource
                         'admin' => 'info',
                     })
                     ->sortable(),
+                Tables\Columns\IconColumn::make('welcome_valid_until')
+                    ->icon(fn ($state): string => blank($state) ? 'heroicon-o-user' : 'heroicon-o-check-circle'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
