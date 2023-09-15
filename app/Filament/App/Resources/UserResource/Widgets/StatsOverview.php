@@ -12,8 +12,8 @@ class StatsOverview extends BaseWidget
     {
         return [
             Stat::make('Members', User::count()),
-            Stat::make('Active', '21%'),
-            Stat::make('Pending', '3:12'),
+            Stat::make('Active', User::whereNull('welcome_valid_until')->count()),
+            Stat::make('Pending', User::whereNotNull('welcome_valid_until')->count()),
         ];
     }
 }
