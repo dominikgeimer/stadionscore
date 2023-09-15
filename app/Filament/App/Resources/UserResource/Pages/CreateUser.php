@@ -18,6 +18,8 @@ class CreateUser extends CreateRecord
 
     protected static ?string $breadcrumb = 'Invite';
 
+    protected static bool $canCreateAnother = false;
+
     protected function getRedirectUrl(): string
     {
         return $this->previousUrl ?? $this->getResource()::getUrl('index');
