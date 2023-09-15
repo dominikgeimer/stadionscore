@@ -48,6 +48,16 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    /**
+     * Determine if the user is active based on the value of the welcome_valid_until attribute.
+     *
+     * @return bool
+     */
+    public function getIsActiveAttribute(): bool
+    {
+        return !$this->attributes['welcome_valid_until'];
+    }
+
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);

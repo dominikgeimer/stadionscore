@@ -95,11 +95,13 @@ class UserResource extends Resource
                         'member' => 'gray',
                         'admin' => 'info',
                         'owner' => 'success',
-                    })
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('welcome_valid_until')
+                    }),
+                Tables\Columns\IconColumn::make('is_active')
                     ->label('Status')
-                    ->icon(fn ($state) => $state === '2000-01-01 00:00:00' ? 'heroicon-o-pencil' : 'heroicon-o-check-circle'),
+                    ->boolean()
+                    ->toggleable()
+                    ->falseIcon('heroicon-o-clock')
+                    ->falseColor('warning'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
