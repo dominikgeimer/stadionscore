@@ -16,8 +16,7 @@ class UserObserver
         if (!auth()->check()) {
             $user->team_id = Team::create()->id;
 
-        } else {
-            Log::info('User invite');
+            $user->assignRole('admin');
         }
     }
 }
