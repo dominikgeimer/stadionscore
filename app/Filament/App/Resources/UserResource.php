@@ -94,10 +94,12 @@ class UserResource extends Resource
                     ->color(fn (string $state): string => match ($state) {
                         'member' => 'gray',
                         'admin' => 'info',
+                        'owner' => 'success',
                     })
                     ->sortable(),
                 Tables\Columns\IconColumn::make('welcome_valid_until')
-                    ->icon(fn ($state): string => blank($state) ? 'heroicon-o-pencil' : 'heroicon-o-check-circle'),
+                    ->label('Status')
+                    ->icon(fn ($state) => $state === '2000-01-01 00:00:00' ? 'heroicon-o-pencil' : 'heroicon-o-check-circle'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
