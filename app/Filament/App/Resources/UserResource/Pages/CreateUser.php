@@ -2,15 +2,32 @@
 
 namespace App\Filament\App\Resources\UserResource\Pages;
 
-use App\Filament\App\Resources\UserResource;
 use Filament\Actions;
+use Filament\Support\Enums\Alignment;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
+use App\Filament\App\Resources\UserResource;
 
 class CreateUser extends CreateRecord
 {
     protected static string $resource = UserResource::class;
 
+    public static string | Alignment $formActionsAlignment = Alignment::Right;
+
     protected ?string $heading = 'New member';
 
-    protected ?string $subheading = 'Create a new member and send an email invitation';
+    protected static ?string $breadcrumb = 'Invite';
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->previousUrl ?? $this->getResource()::getUrl('index');
+    }
+
+    protected function getCreatedNotification(): ?Notification
+    {
+        return Notification::make()
+            ->success()
+            ->title('User registered')
+            ->body('The user has been created successfully.');
+    }
 }

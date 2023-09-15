@@ -30,6 +30,8 @@ class UserResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected static ?string $breadcrumb = 'Team';
+
     public static function getGloballySearchableAttributes(): array
     {
         return ['name', 'email'];
@@ -58,6 +60,7 @@ class UserResource extends Resource
                             ->required()
                             ->maxLength(255),
                     ])
+                    ->columns(2)
             ]);
     }
 

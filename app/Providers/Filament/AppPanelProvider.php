@@ -30,7 +30,7 @@ class AppPanelProvider extends PanelProvider
             ->registration()
             ->login()
             ->profile()
-            ->breadcrumbs(false)
+            //->breadcrumbs(false)
             ->colors([
                 'primary' => Color::Blue,
             ])
