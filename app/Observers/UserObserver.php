@@ -15,8 +15,17 @@ class UserObserver
     {
         if (!auth()->check()) {
             $user->team_id = Team::create()->id;
-
             $user->assignRole('admin');
+        }
+    }
+
+    /**
+     * Handle the User "created" event.
+     */
+    public function created(User $user): void
+    {
+        if (auth()->check()) {
+            $user->sendWelcomeNotification(now()->addWeek());
         }
     }
 }

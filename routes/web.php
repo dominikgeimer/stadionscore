@@ -1,18 +1,14 @@
 <?php
 
+use App\Http\Controllers\Auth\InvitationController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use Spatie\WelcomeNotification\WelcomesNewUsers;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::group(['middleware' => ['web', WelcomesNewUsers::class,]], function () {
+    Route::get('welcome/{user}', [InvitationController::class, 'showWelcomeForm'])->name('welcome');
+    Route::post('welcome/{user}', [InvitationController::class, 'savePassword']);
 });
