@@ -12,7 +12,9 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Filters\TernaryFilter;
 use App\Filament\App\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\App\Resources\UserResource\RelationManagers;
@@ -113,8 +115,16 @@ class UserResource extends Resource
             ])
             ->defaultSort('name', 'asc')
             ->filters([
-                //
-            ])
+                TernaryFilter::make('welcome_valid_until')
+                    ->label('Status')
+                    ->nullable()
+                    ->placeholder('All')
+                    ->trueLabel('Pending')
+                    ->falseLabel('Active'),
+                SelectFilter::make('roles')
+                    ->preload()
+                    ->relationship('roles', 'name', fn (Builder $query) => $query->where('name', '!=', 'owner'))
+                ])
             ->actions([
                 ActionGroup::make([
                     Tables\Actions\EditAction::make(),
