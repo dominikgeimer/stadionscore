@@ -7,6 +7,7 @@ use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Navigation\NavigationItem;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -31,19 +32,24 @@ class AppPanelProvider extends PanelProvider
             ->registration()
             ->login()
             ->profile()
+            ->topNavigation()
             ->colors([
                 'primary' => Color::Blue,
             ])
             ->plugins([
                 FilamentShieldPlugin::make()
             ])
+            ->navigationItems([
+                NavigationItem::make('Documentation')
+                    ->url('https://#', shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-academic-cap')
+                    ->sort(3),
+            ])
             ->databaseNotifications()
             ->databaseNotificationsPolling('30s')
             ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\\Filament\\App\\Resources')
             ->discoverPages(in: app_path('Filament/App/Pages'), for: 'App\\Filament\\App\\Pages')
-            ->pages([
-                Pages\Dashboard::class,
-            ])
+            ->pages([])
             ->discoverWidgets(in: app_path('Filament/App/Widgets'), for: 'App\\Filament\\App\\Widgets')
             ->widgets([])
             ->middleware([
