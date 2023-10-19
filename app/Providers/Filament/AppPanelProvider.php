@@ -29,6 +29,7 @@ class AppPanelProvider extends PanelProvider
             ->id('app')
             ->domain('app.filament.test')
             ->path('')
+            ->spa()
             ->registration()
             ->login()
             ->profile()
