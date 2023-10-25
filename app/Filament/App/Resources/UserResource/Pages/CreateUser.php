@@ -14,6 +14,8 @@ class CreateUser extends CreateRecord
 
     public static string | Alignment $formActionsAlignment = Alignment::Right;
 
+    protected static ?string $title = 'Invite';
+
     protected ?string $heading = 'New member';
 
     protected static ?string $breadcrumb = 'Invite';
