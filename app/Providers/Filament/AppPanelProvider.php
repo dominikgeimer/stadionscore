@@ -27,7 +27,7 @@ class AppPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('app')
-            ->domain('app.filament.test')
+            ->domain('app.nimble.test')
             ->path('')
             ->spa()
             ->registration()
@@ -37,6 +37,8 @@ class AppPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Blue,
             ])
+            ->brandLogo(fn () => view('filament.admin.logo'))
+            ->brandLogoHeight('2rem')
             ->plugins([
                 FilamentShieldPlugin::make()
             ])
