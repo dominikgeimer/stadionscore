@@ -12,11 +12,10 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\WelcomeNotification\ReceivesWelcomeNotification;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuids, HasRoles, BelongsToTeam, ReceivesWelcomeNotification;
+    use HasApiTokens, HasFactory, Notifiable, HasUuids, HasRoles, BelongsToTeam;
 
     /**
      * The attributes that are mass assignable.
@@ -56,7 +55,7 @@ class User extends Authenticatable
      */
     public function getIsActiveAttribute(): bool
     {
-        return !$this->attributes['welcome_valid_until'];
+        return !$this->attributes['invitation_valid_until'];
     }
 
     public function team(): BelongsTo

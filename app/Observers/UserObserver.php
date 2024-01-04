@@ -4,7 +4,9 @@ namespace App\Observers;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Mail\TeamInvitationMail;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class UserObserver
 {
@@ -25,7 +27,8 @@ class UserObserver
     public function created(User $user): void
     {
         if (auth()->check()) {
-            $user->sendWelcomeNotification(now()->addWeek());
+            $user->update(['invitation_valid_until' => now()->addWeek()]);
+            Mail::to($user->email)->send(new TeamInvitationMail($user));
         }
     }
 }
