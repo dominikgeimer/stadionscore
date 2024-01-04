@@ -35,18 +35,12 @@ class AppPanelProvider extends PanelProvider
             ->profile()
             ->topNavigation()
             ->colors([
-                'primary' => Color::Orange,
+                'primary' => Color::Green,
             ])
-            ->brandLogo(asset('images/logo_small.svg'))
+            ->brandLogo(fn () => view('filament.admin.logo'))
             ->brandLogoHeight('2rem')
             ->plugins([
                 FilamentShieldPlugin::make()
-            ])
-            ->navigationItems([
-                NavigationItem::make('Documentation')
-                    ->url('https://#', shouldOpenInNewTab: true)
-                    ->icon('heroicon-o-academic-cap')
-                    ->sort(3),
             ])
             ->databaseNotifications()
             ->databaseNotificationsPolling('30s')
