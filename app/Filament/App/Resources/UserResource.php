@@ -113,7 +113,7 @@ class UserResource extends Resource
             ])
             ->defaultSort('name', 'asc')
             ->filters([
-                TernaryFilter::make('welcome_valid_until')
+                TernaryFilter::make('invitation_valid_until')
                     ->label('Status')
                     ->nullable()
                     ->placeholder('All')
