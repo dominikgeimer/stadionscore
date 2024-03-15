@@ -35,7 +35,7 @@ class AppPanelProvider extends PanelProvider
             ->profile()
             ->topNavigation()
             ->colors([
-                'primary' => Color::Green,
+                'primary' => Color::Orange,
             ])
             ->brandLogo(fn () => view('filament.admin.logo'))
             ->brandLogoHeight('2rem')
