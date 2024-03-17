@@ -27,7 +27,7 @@ class AppPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('app')
-            ->domain('app.nimble.test')
+            ->domain('app.tallstack-starter-app.test')
             ->path('')
             ->spa()
             ->registration()
@@ -35,7 +35,7 @@ class AppPanelProvider extends PanelProvider
             ->profile()
             ->topNavigation()
             ->colors([
-                'primary' => Color::Orange,
+                'primary' => Color::Indigo,
             ])
             ->brandLogo(fn () => view('filament.admin.logo'))
             ->brandLogoHeight('2rem')
