@@ -11,6 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Notifications\Notification;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
@@ -126,15 +127,22 @@ class UserResource extends Resource
             ->actions([
                 ActionGroup::make([
                     Tables\Actions\EditAction::make(),
-                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\DeleteAction::make()
+                        ->successNotification(
+                            Notification::make()
+                                ->success()
+                                ->title('User deleted')
+                                ->body('The user has been deleted successfully.'),
+                        ),
                 ])
             ])
             ->bulkActions([
                 //
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
-            ]);
+                //
+            ])
+            ->emptyStateDescription('Unable to find a matching user. Please adjust your search criteria.');
     }
 
     public static function getRelations(): array

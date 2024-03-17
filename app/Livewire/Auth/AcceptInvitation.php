@@ -11,6 +11,7 @@ use Filament\Forms\Components\TextInput;
 use Illuminate\Validation\Rules\Password;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Notifications\Notification;
 
 class AcceptInvitation extends SimplePage
 {
@@ -57,6 +58,10 @@ class AcceptInvitation extends SimplePage
             'invitation_valid_until' => null,
         ]);
 
+        Notification::make()
+            ->title($user->name.' has accepted the invitation.')
+            ->sendToDatabase(User::all());
+
         auth()->login($user);
 
         $this->redirect('/team');
@@ -85,5 +90,4 @@ class AcceptInvitation extends SimplePage
     {
         return 'Create your user to accept an invitation';
     }
-
 }

@@ -2,6 +2,7 @@
 
 namespace App\Filament\App\Resources\UserResource\Pages;
 
+use App\Models\User;
 use Filament\Actions;
 use Filament\Support\Enums\Alignment;
 use Filament\Notifications\Notification;
@@ -31,7 +32,8 @@ class CreateUser extends CreateRecord
     {
         return Notification::make()
             ->success()
-            ->title('User registered')
-            ->body('The user has been created successfully.');
+            ->title('User invited')
+            ->body('An email has been sent with registration instructions.')
+            ->sendToDatabase(User::all());
     }
 }

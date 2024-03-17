@@ -6,6 +6,7 @@ use Filament\Actions;
 use Filament\Support\Enums\Alignment;
 use Filament\Resources\Pages\EditRecord;
 use App\Filament\App\Resources\UserResource;
+use Filament\Notifications\Notification;
 
 class EditUser extends EditRecord
 {
@@ -18,5 +19,18 @@ class EditUser extends EditRecord
         return [
             Actions\DeleteAction::make(),
         ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->previousUrl ?? $this->getResource()::getUrl('index');
+    }
+
+    protected function getSavedNotification(): ?Notification
+    {
+        return Notification::make()
+            ->success()
+            ->title('User updated.')
+            ->body('Changes have been saved successfully.');
     }
 }
