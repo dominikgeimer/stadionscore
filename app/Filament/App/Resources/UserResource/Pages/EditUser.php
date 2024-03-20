@@ -2,11 +2,12 @@
 
 namespace App\Filament\App\Resources\UserResource\Pages;
 
+use App\Models\User;
 use Filament\Actions;
 use Filament\Support\Enums\Alignment;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use App\Filament\App\Resources\UserResource;
-use Filament\Notifications\Notification;
 
 class EditUser extends EditRecord
 {
@@ -17,7 +18,13 @@ class EditUser extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()
+                ->successNotification(fn ($record) =>
+                    Notification::make()
+                        ->success()
+                        ->title($record->name . ' deleted')
+                        ->body('The user has been deleted successfully.'),
+                ),
         ];
     }
 

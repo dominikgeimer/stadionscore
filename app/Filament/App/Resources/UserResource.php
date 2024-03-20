@@ -128,12 +128,12 @@ class UserResource extends Resource
                 ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make()
-                        ->successNotification(
+                        ->successNotification(fn ($record) =>
                             Notification::make()
-                                ->success()
-                                ->title('User deleted')
-                                ->body('The user has been deleted successfully.'),
-                        ),
+                                    ->success()
+                                    ->title($record->name . ' deleted')
+                                    ->body('The user has been deleted successfully.'),
+                        )
                 ])
             ])
             ->bulkActions([

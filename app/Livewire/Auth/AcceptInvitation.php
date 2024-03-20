@@ -60,7 +60,7 @@ class AcceptInvitation extends SimplePage
 
         Notification::make()
             ->title($user->name.' has accepted the invitation.')
-            ->sendToDatabase(User::all());
+            ->sendToDatabase(User::role('admin')->get());
 
         auth()->login($user);
 

@@ -34,6 +34,6 @@ class CreateUser extends CreateRecord
             ->success()
             ->title('User invited')
             ->body('An email has been sent with registration instructions.')
-            ->sendToDatabase(User::all());
+            ->sendToDatabase(User::role('admin')->get());
     }
 }

@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\Team;
 use App\Models\User;
 use App\Mail\TeamInvitationMail;
+use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
@@ -30,5 +31,17 @@ class UserObserver
             $user->update(['invitation_valid_until' => now()->addWeek()]);
             Mail::to($user->email)->send(new TeamInvitationMail($user));
         }
+    }
+
+     /**
+     * Handle the User "delete" event.
+     */
+    public function deleted(User $user): void
+    {
+        Notification::make()
+            ->success()
+            ->title($user->name . ' deleted.')
+            ->body('The user has been deleted successfully.')
+            ->sendToDatabase(User::all());
     }
 }
