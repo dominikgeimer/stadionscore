@@ -60,7 +60,8 @@ class UserResource extends Resource
                         Forms\Components\TextInput::make('email')
                             ->email()
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->unique(),
                     ])
                     ->aside(),
                 Section::make('Role selection')
@@ -130,9 +131,10 @@ class UserResource extends Resource
                     Tables\Actions\DeleteAction::make()
                         ->successNotification(fn ($record) =>
                             Notification::make()
-                                    ->success()
-                                    ->title($record->name . ' deleted')
-                                    ->body('The user has been deleted successfully.'),
+                                ->success()
+                                ->title($record->name . ' deleted')
+                                ->body('The user has been deleted successfully.')
+                                ->sendToDatabase(User::role('admin')->get()),
                         )
                 ])
             ])

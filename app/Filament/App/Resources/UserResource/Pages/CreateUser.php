@@ -32,7 +32,7 @@ class CreateUser extends CreateRecord
     {
         return Notification::make()
             ->success()
-            ->title('User invited')
+            ->title($this->getRecord()->name . ' invited')
             ->body('An email has been sent with registration instructions.')
             ->sendToDatabase(User::role('admin')->get());
     }

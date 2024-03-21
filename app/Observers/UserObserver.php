@@ -33,15 +33,4 @@ class UserObserver
         }
     }
 
-     /**
-     * Handle the User "delete" event.
-     */
-    public function deleted(User $user): void
-    {
-        Notification::make()
-            ->success()
-            ->title($user->name . ' deleted.')
-            ->body('The user has been deleted successfully.')
-            ->sendToDatabase(User::all());
-    }
 }
