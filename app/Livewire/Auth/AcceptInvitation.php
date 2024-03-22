@@ -25,6 +25,14 @@ class AcceptInvitation extends SimplePage
 
     public function mount(): void
     {
+        $user = User::find($this->invitation);
+
+        // Überprüfe, ob die Einladung noch gültig ist
+        if (!$user || $user->invitation_valid_until === null || $user->invitation_valid_until->isPast()) {
+            // Umleitung oder Anzeige einer Nachricht, dass die Einladung ungültig ist
+            abort(403, 'This invitation is no longer valid');
+        }
+
         $this->form->fill();
     }
 
@@ -58,7 +66,9 @@ class AcceptInvitation extends SimplePage
         ]);
 
         Notification::make()
-            ->title($user->name.' has accepted the invitation.')
+            ->success()
+            ->title($user->name.' joined')
+            ->body('The invitation has been accepted.')
             ->sendToDatabase(User::role('admin')->get());
 
         auth()->login($user);
