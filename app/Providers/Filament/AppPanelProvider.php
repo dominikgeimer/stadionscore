@@ -27,16 +27,13 @@ class AppPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('app')
-            ->domain('app.tallstack-starter-app.test')
+            ->domain('app.' . parse_url(env('APP_URL'), PHP_URL_HOST))
             ->path('')
             ->spa()
             ->registration()
             ->login()
             ->profile()
             ->topNavigation()
-            ->colors([
-                'primary' => Color::Indigo,
-            ])
             ->brandLogo(fn () => view('filament.admin.logo'))
             ->brandLogoHeight('2rem')
             ->plugins([

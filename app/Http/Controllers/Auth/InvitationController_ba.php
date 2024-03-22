@@ -8,9 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Filament\Notifications\Notification;
 use Symfony\Component\HttpFoundation\Response;
-use Spatie\WelcomeNotification\WelcomeController;
 
-class InvitationController extends WelcomeController
+class InvitationController
 {
     public function savePassword(Request $request, User $user)
     {

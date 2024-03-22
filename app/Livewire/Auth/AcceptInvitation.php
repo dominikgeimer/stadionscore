@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Auth;
 
-use App\Models\Team;
 use App\Models\User;
 use Filament\Forms\Form;
 use Filament\Actions\Action;
@@ -77,17 +76,17 @@ class AcceptInvitation extends SimplePage
     public function getRegisterFormAction(): Action
     {
         return Action::make('register')
-            ->label(__('filament-panels::pages/auth/register.form.actions.register.label'))
+            ->label('Accept Invitation')
             ->submit('register');
     }
 
     public function getHeading(): string
     {
-        return 'Accept Invitation';
+        return 'Welcome to the Team';
     }
 
     public function getSubHeading(): string
     {
-        return 'Create your user to accept an invitation';
+        return 'Set your password to accept your invitation and become part of the team';
     }
 }
