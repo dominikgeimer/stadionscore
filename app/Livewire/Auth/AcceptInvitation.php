@@ -27,9 +27,7 @@ class AcceptInvitation extends SimplePage
     {
         $user = User::find($this->invitation);
 
-        // Überprüfe, ob die Einladung noch gültig ist
         if (!$user || $user->invitation_valid_until === null || $user->invitation_valid_until->isPast()) {
-            // Umleitung oder Anzeige einer Nachricht, dass die Einladung ungültig ist
             abort(403, 'This invitation is no longer valid');
         }
 

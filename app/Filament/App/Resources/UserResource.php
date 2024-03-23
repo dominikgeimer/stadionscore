@@ -138,12 +138,6 @@ class UserResource extends Resource
                         )
                 ])
             ])
-            ->bulkActions([
-                //
-            ])
-            ->emptyStateActions([
-                //
-            ])
             ->emptyStateDescription('Unable to find a matching user. Please adjust your search criteria.');
     }
 
