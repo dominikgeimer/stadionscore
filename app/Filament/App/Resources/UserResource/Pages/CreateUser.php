@@ -31,7 +31,7 @@ class CreateUser extends CreateRecord
     protected function getCreatedNotification(): ?Notification
     {
         return Notification::make()
-            ->success()
+            ->info()
             ->title($this->getRecord()->name . ' invited')
             ->body('An email has been sent with registration instructions.')
             ->sendToDatabase(User::role('admin')->get());

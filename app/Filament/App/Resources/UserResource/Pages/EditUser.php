@@ -23,7 +23,8 @@ class EditUser extends EditRecord
                     Notification::make()
                         ->success()
                         ->title($record->name . ' deleted')
-                        ->body('The user has been deleted successfully.'),
+                        ->body('The user has been deleted successfully.')
+                        ->sendToDatabase(User::role('admin')->get()),
                 ),
         ];
     }
@@ -36,8 +37,9 @@ class EditUser extends EditRecord
     protected function getSavedNotification(): ?Notification
     {
         return Notification::make()
-            ->success()
-            ->title('User updated')
-            ->body('Changes have been saved successfully.');
+            ->info()
+            ->title($this->getRecord()->name . ' updated')
+            ->body('Changes have been saved successfully.')
+            ->sendToDatabase(User::role('admin')->get());
     }
 }

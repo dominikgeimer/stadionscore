@@ -61,7 +61,7 @@ class UserResource extends Resource
                             ->email()
                             ->required()
                             ->maxLength(255)
-                            ->unique(),
+                            ->unique(ignoreRecord: true)
                     ])
                     ->aside(),
                 Section::make('Role selection')
