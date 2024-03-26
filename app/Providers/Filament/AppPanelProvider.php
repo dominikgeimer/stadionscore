@@ -32,6 +32,7 @@ class AppPanelProvider extends PanelProvider
             ->spa()
             ->registration()
             ->login()
+            ->passwordReset()
             ->profile()
             ->topNavigation()
             ->brandLogo(fn () => view('filament.admin.logo'))
