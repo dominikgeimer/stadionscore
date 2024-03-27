@@ -4,18 +4,18 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use Laravel\Sanctum\HasApiTokens;
 use App\Models\Traits\BelongsToTeam;
-use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuids, HasRoles, BelongsToTeam;
+    use BelongsToTeam, HasApiTokens, HasFactory, HasRoles, HasUuids, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -51,12 +51,10 @@ class User extends Authenticatable
 
     /**
      * Determine if the user is active based on the value of the welcome_valid_until attribute.
-     *
-     * @return bool
      */
     public function getIsActiveAttribute(): bool
     {
-        return !$this->attributes['invitation_valid_until'];
+        return ! $this->attributes['invitation_valid_until'];
     }
 
     public function team(): BelongsTo

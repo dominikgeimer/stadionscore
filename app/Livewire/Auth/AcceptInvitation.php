@@ -3,19 +3,19 @@
 namespace App\Livewire\Auth;
 
 use App\Models\User;
-use Filament\Forms\Form;
 use Filament\Actions\Action;
-use Filament\Pages\SimplePage;
-use Filament\Forms\Components\TextInput;
-use Illuminate\Validation\Rules\Password;
-use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Form;
 use Filament\Notifications\Notification;
+use Filament\Pages\SimplePage;
+use Illuminate\Validation\Rules\Password;
 
 class AcceptInvitation extends SimplePage
 {
-    use InteractsWithForms;
     use InteractsWithActions;
+    use InteractsWithForms;
 
     protected static string $view = 'livewire.auth.accept-invitation';
 
@@ -27,7 +27,7 @@ class AcceptInvitation extends SimplePage
     {
         $user = User::find($this->invitation);
 
-        if (!$user || $user->invitation_valid_until === null || $user->invitation_valid_until->isPast()) {
+        if (! $user || $user->invitation_valid_until === null || $user->invitation_valid_until->isPast()) {
             abort(403, 'This invitation is no longer valid');
         }
 

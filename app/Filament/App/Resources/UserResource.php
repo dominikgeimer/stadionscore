@@ -2,23 +2,21 @@
 
 namespace App\Filament\App\Resources;
 
-use Filament\Forms;
+use App\Filament\App\Resources\UserResource\Pages;
 use App\Models\User;
-use Filament\Tables;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Filament\Resources\Resource;
-use Filament\Forms\Components\Select;
+use Filament\Forms;
 use Filament\Forms\Components\Section;
-use Illuminate\Database\Eloquent\Model;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Form;
 use Filament\Notifications\Notification;
+use Filament\Resources\Resource;
+use Filament\Tables;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Filters\SelectFilter;
-use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Filters\TernaryFilter;
-use App\Filament\App\Resources\UserResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\App\Resources\UserResource\RelationManagers;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class UserResource extends Resource
 {
@@ -61,7 +59,7 @@ class UserResource extends Resource
                             ->email()
                             ->required()
                             ->maxLength(255)
-                            ->unique(ignoreRecord: true)
+                            ->unique(ignoreRecord: true),
                     ])
                     ->aside(),
                 Section::make('Role selection')
@@ -74,9 +72,9 @@ class UserResource extends Resource
                             ->preload()
                             ->multiple()
                             ->maxItems(1)
-                            ->relationship('roles', 'name', fn (Builder $query) => $query->where('name', '!=', 'owner'))
+                            ->relationship('roles', 'name', fn (Builder $query) => $query->where('name', '!=', 'owner')),
                     ])
-                    ->aside()
+                    ->aside(),
             ]);
     }
 
@@ -123,20 +121,19 @@ class UserResource extends Resource
                     ->falseLabel('Active'),
                 SelectFilter::make('roles')
                     ->preload()
-                    ->relationship('roles', 'name', fn (Builder $query) => $query->where('name', '!=', 'owner'))
-                ])
+                    ->relationship('roles', 'name', fn (Builder $query) => $query->where('name', '!=', 'owner')),
+            ])
             ->actions([
                 ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make()
-                        ->successNotification(fn ($record) =>
-                            Notification::make()
-                                ->success()
-                                ->title($record->name . ' deleted')
-                                ->body('The user has been deleted successfully.')
-                                ->sendToDatabase(User::role('admin')->get()),
-                        )
-                ])
+                        ->successNotification(fn ($record) => Notification::make()
+                            ->success()
+                            ->title($record->name.' deleted')
+                            ->body('The user has been deleted successfully.')
+                            ->sendToDatabase(User::role('admin')->get()),
+                        ),
+                ]),
             ])
             ->emptyStateDescription('Unable to find a matching user. Please adjust your search criteria.');
     }

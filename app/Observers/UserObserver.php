@@ -2,11 +2,9 @@
 
 namespace App\Observers;
 
+use App\Mail\TeamInvitationMail;
 use App\Models\Team;
 use App\Models\User;
-use App\Mail\TeamInvitationMail;
-use Filament\Notifications\Notification;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class UserObserver
@@ -16,7 +14,7 @@ class UserObserver
      */
     public function creating(User $user): void
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             $user->team_id = Team::create()->id;
             $user->assignRole('admin');
         }
@@ -32,5 +30,4 @@ class UserObserver
             Mail::to($user->email)->send(new TeamInvitationMail($user));
         }
     }
-
 }
