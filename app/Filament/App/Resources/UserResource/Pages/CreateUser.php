@@ -2,18 +2,17 @@
 
 namespace App\Filament\App\Resources\UserResource\Pages;
 
+use App\Filament\App\Resources\UserResource;
 use App\Models\User;
-use Filament\Actions;
-use Filament\Support\Enums\Alignment;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
-use App\Filament\App\Resources\UserResource;
+use Filament\Support\Enums\Alignment;
 
 class CreateUser extends CreateRecord
 {
     protected static string $resource = UserResource::class;
 
-    public static string | Alignment $formActionsAlignment = Alignment::Right;
+    public static string|Alignment $formActionsAlignment = Alignment::Right;
 
     protected static ?string $title = 'Invite';
 
@@ -32,7 +31,7 @@ class CreateUser extends CreateRecord
     {
         return Notification::make()
             ->info()
-            ->title($this->getRecord()->name . ' invited')
+            ->title($this->getRecord()->name.' invited')
             ->body('An email has been sent with registration instructions.')
             ->sendToDatabase(User::role('admin')->get());
     }

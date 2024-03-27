@@ -3,8 +3,8 @@
 namespace App\Filament\App\Resources\UserResource\Widgets;
 
 use App\Models\User;
-use Filament\Widgets\StatsOverviewWidget\Stat;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
+use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class StatsOverview extends BaseWidget
 {
