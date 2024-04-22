@@ -20,4 +20,9 @@ class Game extends Model
     {
         return $this->belongsTo(Club::class, 'away_club_id');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

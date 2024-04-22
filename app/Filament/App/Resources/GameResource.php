@@ -13,6 +13,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Illuminate\Database\Eloquent\Builder;
+use Forms\Components\BelongsToManyMultiSelect;
 use App\Filament\App\Resources\GameResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\App\Resources\GameResource\RelationManagers;
@@ -34,6 +35,12 @@ class GameResource extends Resource
                     ->relationship(name: 'awayClub', titleAttribute: 'name')
                     ->required(),
                 TextInput::make('result'),
+                Select::make('users')
+                    ->label('Participants')
+                    ->multiple()
+                    ->searchable()
+                    ->preload()
+                    ->relationship('users', 'name')
             ]);
     }
 
@@ -50,6 +57,8 @@ class GameResource extends Resource
                     ->label(false),
                 TextColumn::make('awayClub.name')
                     ->label('Away Club'),
+                TextColumn::make('users_count')->counts('users')
+                    ->label('Participants'),
             ])
             ->filters([
                 //
