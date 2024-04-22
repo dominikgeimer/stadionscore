@@ -18,6 +18,7 @@ use Forms\Components\BelongsToManyMultiSelect;
 use App\Filament\App\Resources\GameResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\App\Resources\GameResource\RelationManagers;
+use App\Filament\App\Resources\GameResource\RelationManagers\UsersRelationManager;
 
 class GameResource extends Resource
 {
@@ -45,12 +46,6 @@ class GameResource extends Resource
                     ->relationship(name: 'awayClub', titleAttribute: 'name')
                     ->required(),
                 TextInput::make('result'),
-                Select::make('users')
-                    ->label('Participants')
-                    ->multiple()
-                    ->searchable()
-                    ->preload()
-                    ->relationship('users', 'name')
             ]);
     }
 
@@ -89,7 +84,7 @@ class GameResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            UsersRelationManager::class
         ];
     }
 
