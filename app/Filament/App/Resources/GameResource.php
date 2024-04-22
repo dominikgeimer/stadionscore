@@ -12,6 +12,7 @@ use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\DatePicker;
 use Illuminate\Database\Eloquent\Builder;
 use Forms\Components\BelongsToManyMultiSelect;
 use App\Filament\App\Resources\GameResource\Pages;
@@ -28,6 +29,15 @@ class GameResource extends Resource
     {
         return $form
             ->schema([
+                Select::make('matchday')
+                ->options([
+                    1 => 1,
+                    2 => 2,
+                    3 => 3,
+                    4 => 4,
+                ]),
+                DatePicker::make('date')
+                    ->required(),
                 Select::make('home_club_id')
                     ->relationship(name: 'homeClub', titleAttribute: 'name')
                     ->required(),
@@ -48,10 +58,10 @@ class GameResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')
-                    ->label('Matchday')
+                TextColumn::make('matchday')
                     ->badge()
                     ->sortable(),
+                TextColumn::make('date'),
                 ImageColumn::make('homeClub.logo_url')
                     ->label(false),
                 TextColumn::make('homeClub.name')
