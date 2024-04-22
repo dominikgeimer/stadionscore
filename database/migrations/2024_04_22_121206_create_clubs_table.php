@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('clubs', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('logo_url');
             $table->timestamps();
         });
     }
