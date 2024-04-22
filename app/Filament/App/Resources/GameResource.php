@@ -48,6 +48,10 @@ class GameResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')
+                    ->label('Matchday')
+                    ->badge()
+                    ->sortable(),
                 ImageColumn::make('homeClub.logo_url')
                     ->label(false),
                 TextColumn::make('homeClub.name')
@@ -58,7 +62,8 @@ class GameResource extends Resource
                 TextColumn::make('awayClub.name')
                     ->label('Away Club'),
                 TextColumn::make('users_count')->counts('users')
-                    ->label('Participants'),
+                    ->label('Participants')
+                    ->sortable(),
             ])
             ->filters([
                 //
