@@ -13,6 +13,7 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
@@ -103,6 +104,8 @@ class UserResource extends Resource
                     ->toggleable()
                     ->falseIcon('heroicon-o-clock')
                     ->falseColor('warning'),
+                TextColumn::make('games_count')->counts('games')
+                    ->label('Games'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
