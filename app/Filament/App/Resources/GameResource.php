@@ -22,7 +22,7 @@ class GameResource extends Resource
 {
     protected static ?string $model = Game::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'phosphor-soccer-ball-duotone';
 
     public static function form(Form $form): Form
     {
@@ -55,12 +55,12 @@ class GameResource extends Resource
                 ImageColumn::make('homeClub.logo_url')
                     ->label(false),
                 TextColumn::make('homeClub.name')
-                    ->label('Home Club'),
+                    ->label('Home'),
                 TextColumn::make('result'),
                 ImageColumn::make('awayClub.logo_url')
                     ->label(false),
                 TextColumn::make('awayClub.name')
-                    ->label('Away Club'),
+                    ->label('Away'),
                 TextColumn::make('users_count')->counts('users')
                     ->label('Participants')
                     ->sortable(),

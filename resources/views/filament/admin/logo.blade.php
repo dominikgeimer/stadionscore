@@ -1,1 +1,1 @@
-<x-heroicon-o-cube-transparent class="h-full text-primary-500"/>
+<x-phosphor-coin-duotone class="h-full text-primary-500"/>

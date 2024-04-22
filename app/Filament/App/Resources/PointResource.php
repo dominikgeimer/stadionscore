@@ -19,7 +19,7 @@ class PointResource extends Resource
 {
     protected static ?string $model = Point::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'phosphor-ranking-duotone';
 
     public static function form(Form $form): Form
     {
