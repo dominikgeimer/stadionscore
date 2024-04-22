@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('home_club_id')->constrained('clubs');
             $table->foreignId('away_club_id')->constrained('clubs');
-            $table->string('halftime_result')->nullable();
-            $table->string('final_result')->nullable();
+            $table->string('result')->nullable();
             $table->timestamps();
         });
     }
