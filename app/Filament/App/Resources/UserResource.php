@@ -3,6 +3,7 @@
 namespace App\Filament\App\Resources;
 
 use App\Filament\App\Resources\UserResource\Pages;
+use App\Filament\App\Resources\UserResource\RelationManagers\GamesRelationManager;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
@@ -141,7 +142,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            GamesRelationManager::class,
         ];
     }
 
